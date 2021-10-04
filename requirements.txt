@@ -1,0 +1,8 @@
+setuptools
+paramiko
+requests
+six
+docker
+pubtools>=0.3.0
+
+# -e git+https://code.engineering.redhat.com/gerrit/rhmsg#egg=rhmsg-0.9
