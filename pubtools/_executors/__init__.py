@@ -12,7 +12,7 @@ import tempfile
 import docker
 import paramiko
 
-LOG = logging.getLogger("pubtools.quay")
+LOG = logging.getLogger("pubtools.executors")
 
 
 # Docker client is called differently based on the version used. Unify the calls.
