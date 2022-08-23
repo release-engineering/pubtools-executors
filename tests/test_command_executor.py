@@ -126,7 +126,7 @@ def test_local_executor_add_file():
     """Test local executor add file method."""
     executor = LocalExecutorBearer({"some_param": "value"})
     with mock.patch("pubtools._executors.open") as mocked_open:
-        executor._add_file(u"some-data", "some_file")
+        executor._add_file("some-data", "some_file")
         print(mocked_open.mock_calls)
         mocked_open.assert_called_once_with("/tmp/some_file", "w")
         mocked_open.return_value.__enter__.return_value.write.assert_called_once_with(
@@ -259,7 +259,7 @@ def test_remote_executor_add_file(mock_client):
         password="123456",
         accept_unknown_host=True,
     )
-    executor._add_file(u"some-data", "some_file")
+    executor._add_file("some-data", "some_file")
     mock_client.return_value.open_sftp.assert_called_once()
     mock_client.return_value.open_sftp.return_value.put.assert_called_once_with(
         mock.ANY, remote_path="/tmp/some_file"

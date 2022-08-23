@@ -3,14 +3,16 @@ import json
 from six.moves import shlex_quote
 
 from . import Executor, Commands, ContainerExecutorBearer
+from .helpers import retry
 
 
-LOG = logging.getLogger("pubtools.quay")
+LOG = logging.getLogger("pubtools.executors")
 
 
 class SkopeoCommands(Commands):
     """Set of skopeo commands ran on an executor."""
 
+    @retry("Tag images")
     def tag_images(self, source_ref, dest_refs, all_arch=False):
         """
         Copy image from source to destination(s) using skopeo.
