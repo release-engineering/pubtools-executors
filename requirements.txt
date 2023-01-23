@@ -1,7 +1,6 @@
 setuptools
 paramiko
 requests
-six
 docker
 pubtools>=0.3.0
 
