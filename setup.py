@@ -71,10 +71,6 @@ def get_requirements():
     with open("requirements.txt") as f:
         reqs = f.read().splitlines()
     
-    if sys.version_info < (2, 7):
-        reqs = [d for d in reqs if d not in PY26_BLACKLISTED_DEPENDENCIES]
-        reqs.extend(PY26_EXTRA_DEPENDENCIES)
-
     # If we are building an RPM, we don't have pip available, and we want
     # to use the 'name + dependency_link' style
     if building_rpm():
