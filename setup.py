@@ -45,7 +45,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 2.7",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: Implementation :: CPython",
@@ -72,10 +71,6 @@ def get_requirements():
     with open("requirements.txt") as f:
         reqs = f.read().splitlines()
     
-    if sys.version_info < (2, 7):
-        reqs = [d for d in reqs if d not in PY26_BLACKLISTED_DEPENDENCIES]
-        reqs.extend(PY26_EXTRA_DEPENDENCIES)
-
     # If we are building an RPM, we don't have pip available, and we want
     # to use the 'name + dependency_link' style
     if building_rpm():
@@ -128,6 +123,7 @@ setup(
     author_email="lgallovi@redhat.com",
     url="https://github.com/release-engineering/pubtools-executors",
     classifiers=classifiers,
+    python_requires=">=3.6",
     packages=find_packages(exclude=["tests"]),
     data_files=[],
     install_requires=get_requirements(),

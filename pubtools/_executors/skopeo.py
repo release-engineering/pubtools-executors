@@ -1,6 +1,6 @@
 import logging
 import json
-from six.moves import shlex_quote
+from shlex import quote
 
 from . import Executor, Commands, ContainerExecutorBearer
 from .helpers import retry
@@ -32,7 +32,7 @@ class SkopeoCommands(Commands):
 
         for dest_ref in dest_refs:
             LOG.info("Tagging source '{0}' to destination '{1}'".format(source_ref, dest_ref))
-            self.executor._run_cmd(cmd.format(shlex_quote(source_ref), shlex_quote(dest_ref)))
+            self.executor._run_cmd(cmd.format(quote(source_ref), quote(dest_ref)))
             LOG.info("Destination image {0} has been tagged.".format(dest_ref))
 
         LOG.info("Tagging complete.")
@@ -67,7 +67,7 @@ class SkopeoCommands(Commands):
         cmd_login = (
             " sh -c 'cat /tmp/{1} | skopeo login --authfile $HOME/.docker/config.json"
             " -u {0} --password-stdin quay.io'"
-        ).format(shlex_quote(username), shlex_quote(password_file))
+        ).format(quote(username), quote(password_file))
         out, err = self.executor._run_cmd(cmd_login)
 
         if "Login Succeeded" in out:
